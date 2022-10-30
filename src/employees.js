@@ -2,6 +2,9 @@ import {
     useState
 } from "react";
 
+import femaleAvatar from './images/femaleAvatar.svg'
+import maleAvatar from './images/maleAvatar.svg'
+
 const Employees = () => {
     const [employees, setEmployees] = useState([{
             id: 1,
@@ -90,9 +93,20 @@ const Employees = () => {
     ]);
     
     return(
-        <div>
-        {employees.map(employe => <p>{employe.fullName}</p>)}
-        </div>
+        <main>
+            <div className="card-Container">
+                {employees.map(employee =>  (
+                    <div id={employee.id} className="card">
+                        {(employee.gender === 'male')   ? <img src={maleAvatar} className="card-avatar" alt="Employee avatar"/>
+                                                        : <img src={femaleAvatar} className="card-avatar" alt="Employee avatar"/>} 
+                        <div className="info">
+                            <p className="card-name"> {employee.fullName} </p>
+                            <p className="designation"> {employee.designation} </p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </main>
     )
 
 };
