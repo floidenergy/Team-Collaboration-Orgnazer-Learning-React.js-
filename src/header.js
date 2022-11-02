@@ -1,7 +1,8 @@
-const Header = () => {
+const Header = ({SelectedTeam, SelectedTeamCount}) => {
     return (
         <header>
-            <h1>header</h1>
+            <h1>{SelectedTeam}</h1>
+            <h2>Has {SelectedTeamCount} Members</h2>
         </header>
     )
 }

@@ -5,8 +5,36 @@
 }
 
 body{
-    width: 100vw;
+    font-family: 'Courier New', Courier, monospace;
+    width: 100%;
     height: 100vh;
+    padding: 25px 25px;
+}
+
+div#root {
+    width: 100vw;
+}
+
+main {
+    width: 100%;
+}
+
+.TeamSelection {
+    width: 600px;
+    margin: 0 auto;
+
+    display: inline;
+}
+
+.TeamSelection > select#teamDropDown {
+    width: 50%;
+    border-radius: 5px;
+    border: 1.5px solid gray;
+    background-color: white;
+    height: 35px;
+    margin: 0 auto;
+    display: block;
+    font-weight: 600;
 }
 
 .card-Container {
@@ -14,13 +42,16 @@ body{
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
-    align-items: center;
     margin: 0 auto;
+    /* border: 1px solid black; */
+    justify-content: center;
 }
 
 .card-Container > .card{
-    width: 32%;
-    height: 150px;
+    width: 30vw;
+    height: 20vh;
+    min-width: 150px;
+    max-width: 400px;
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3), -2px -2px 5px rgba(0,0,0,0.3);
     display: flex;
@@ -28,10 +59,13 @@ body{
     align-items: center;
     gap: 10px;
     margin-top: 100px;
+    position: relative;
+    background-color: white;
 }
 
 .card-Container > .card > img {
-    width: 150px;
+    width: 70%;
+    max-width: 115px;
     margin-top: -70px;
     border: 5px solid red;
     border-radius: 100%;
@@ -41,8 +75,10 @@ body{
 .card-Container > .card > .info {
     background-color: red;
     width: 100%;
+    position: absolute;
     height: calc(100% - 50px);
     padding-top: 10px;
+    bottom: 0px;
     border-radius: 0 0 10px 10px;
 }
 
@@ -57,4 +93,8 @@ body{
     font-size: large;
     text-align: center;
     color: white;
+}
+
+.card-Container > .card.standOut {
+    border: 2px solid black;
 }
