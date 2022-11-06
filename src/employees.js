@@ -1,7 +1,10 @@
+import * as React from 'react'
+
 import femaleAvatar from './images/femaleAvatar.svg'
 import maleAvatar from './images/maleAvatar.svg'
+import Header from './header';
 
-const Employees = ({employees, setEmployees, SelectedTeam, setTeam}) => {
+const EmployeesCards = ({employees, setEmployees, SelectedTeam, setTeam}) => {
     
     const HandleTeamChange = (event) =>{
         setTeam(event.target.value)
@@ -25,7 +28,10 @@ const Employees = ({employees, setEmployees, SelectedTeam, setTeam}) => {
 
     return(
         <main>
-            
+            <Header 
+                SelectedTeam={SelectedTeam}
+                SelectedTeamCount={employees.filter(employee => employee.teamName === SelectedTeam).length}
+            />
             <div className="TeamSelection">
                 <select id="teamDropDown" value={SelectedTeam} onChange={HandleTeamChange}>
                     <option value="TeamA">Team A</option>
@@ -53,4 +59,4 @@ const Employees = ({employees, setEmployees, SelectedTeam, setTeam}) => {
 
 };
 
-export default Employees;
+export default EmployeesCards;

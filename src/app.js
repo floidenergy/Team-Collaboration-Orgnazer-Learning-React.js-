@@ -1,12 +1,16 @@
 import * as React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import './style.css'
-import Header from './header'
-import Employees from './employees';
+import Nav from './nav';
+import EmployeesCards from './employees';
+import Teams from './Teams'
+
 import Footer from './footer';
 
 function App(){
 
-    const [employees, setEmployees] = React.useState([{
+    const [employees, setEmployees] = React.useState(JSON.parse(localStorage.getItem('EmployeesList')) || [{
             id: 1,
             fullName: "Bob Jones",
             designation: "JavaScript Developer",
@@ -92,23 +96,35 @@ function App(){
         },
     ]);
 
-    const [SelectedTeam, setTeam] = React.useState('TeamB')
+    const [SelectedTeam, setTeam] = React.useState(JSON.parse(localStorage.getItem('TeamSelected')) || 'TeamB')
+    
+    // console.log(employees.filter(emp => emp.teamName == 'TeamA'));
+//TODO: MAKE IT SO IT STORES IN LOCAL STORAGE
 
+    React.useEffect(()=> {
+        localStorage.setItem('EmployeesList', JSON.stringify(employees))
+    }, [employees])
+
+    React.useEffect(() => {
+        localStorage.setItem('TeamSelected', JSON.stringify(SelectedTeam));
+    }, [SelectedTeam])
 
     return(
-        <>
-            <Header 
-                SelectedTeam={SelectedTeam}
-                SelectedTeamCount={employees.filter(employee => employee.teamName === SelectedTeam).length}
-            />
-            <Employees
-                employees={employees}
-                setEmployees={setEmployees}
-                SelectedTeam={SelectedTeam}
-                setTeam={setTeam}
-            />
+        <BrowserRouter>
+            <Nav />
+
+            <Routes>
+                <Route path='/' element={<EmployeesCards
+                                            employees={employees}
+                                            setEmployees={setEmployees}
+                                            SelectedTeam={SelectedTeam}
+                                            setTeam={setTeam}
+                                            />}
+                                        />
+                <Route path='/teams' element={<Teams Employees={employees}/>} />
+            </Routes>
             <Footer />
-        </>
+        </BrowserRouter>
     )
 }
 
